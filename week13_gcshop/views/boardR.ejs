@@ -1,0 +1,45 @@
+<div class="container"> 
+  <h2>게시글 상세보기</h2>
+  
+  <div class="mb-3">
+    <label class="form-label">제목</label> 
+    <input class="form-control" type="text" value="<%= post.title %>" style="width:300px;" disabled />
+  </div>
+  
+  <div class="mb-3">
+    <label class="form-label">작성자</label> 
+    <input class="form-control" type="text" value="<%= post.writer_name %>" style="width:300px;" disabled />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">작성일자</label> 
+    <input class="form-control" type="text" value="<%= post.date %>" style="width:300px;" disabled />
+  </div>
+  
+  <div class="mb-3">
+    <label class="form-label">내용</label> 
+    <textarea class="form-control" style="width:800px;height: 200px;" disabled><%= post.content %></textarea>
+  </div>
+  
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <% if (cls === 'MNG' && re_YN === 'Y' && (!post.p_id || post.p_id == 0 || post.board_id == post.p_id) && !hasReply) { %>
+      <a href="/board/answer/<%= post.board_id %>/<%= pNum %>" class="btn btn-info text-white me-md-2">답변</a>
+    <% } %>
+
+    <a href="/board/view/<%= post.type_id %>/<%= pNum %>" class="btn btn-info text-white me-md-2">목록</a>
+    
+    <% if (cls === 'MNG' || (cls === 'CST' && post.loginid === userId)) { %>
+      
+      <a href="/board/update/<%= post.board_id %>/<%= post.type_id %>/<%= pNum %>" class="btn btn-info text-white me-md-2">
+        수정
+      </a>
+      
+      <a href="/board/delete/<%= post.board_id %>/<%= post.type_id %>/<%= pNum %>" 
+         class="btn btn-info text-white me-md-2" 
+         onclick="return confirm('정말로 삭제하시겠습니까?')">
+        삭제
+      </a>
+      
+    <% } %>
+  </div>
+</div>

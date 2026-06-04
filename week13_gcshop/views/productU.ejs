@@ -1,0 +1,98 @@
+<div class="container mt-4">
+  <h2>상품 수정</h2>
+
+  <form action="/product/update_process" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="prod_id" value="<%= p.prod_id %>">
+    <input type="hidden" name="old_image" value="<%= p.image %>">
+    
+    <input type="hidden" name="main_id" id="main_id" value="<%= p.main_id %>">
+    <input type="hidden" name="sub_id" id="sub_id" value="<%= p.sub_id %>">
+
+    <div class="mb-3 d-flex align-items-center">
+      <label class="form-label" for="id_main">카테고리</label>
+      <select name="category" id="id_main" style="width: 300px;" required onchange="updateCategoryIds()">
+        <% category.forEach((item) => { %>
+          <option value="<%= item.main_id %>:<%= item.sub_id %>" 
+            <%= (item.main_id == p.main_id && item.sub_id == p.sub_id) ? 'selected' : '' %>>
+            <%= item.main_name %>: <%= item.sub_name %>
+          </option>
+        <% }) %>
+      </select>
+    </div>
+
+    <table>
+      <tr>
+        <td>
+          <div class="mb-3">
+            <label class="form-label" for="name">제품명</label>
+            <input class="form-control" type="text" name="name" value="<%= p.name %>" style="width: 300px" required />
+          </div>
+        </td>
+        <td width="30px"></td>
+        <td>
+          <div class="mb-3">
+            <label class="form-label" for="price">가격</label>
+            <input class="form-control" type="number" name="price" value="<%= p.price %>" style="width: 300px" required />
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="mb-3">
+            <label class="form-label" for="stock">재고</label>
+            <input class="form-control" type="number" name="stock" value="<%= p.stock %>" style="width: 300px" required />
+          </div>
+        </td>
+        <td width="30px"></td>
+        <td>
+          <div class="mb-3">
+            <label class="form-label" for="brand">브랜드</label>
+            <input class="form-control" type="text" name="brand" value="<%= p.brand %>" style="width: 300px" required />
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="mb-3">
+            <label class="form-label" for="supplier">공급자</label>
+            <input class="form-control" type="text" name="supplier" value="<%= p.supplier %>" style="width: 300px" required />
+          </div>
+        </td>
+        <td width="30px"></td>
+        <td></td>
+      </tr>
+    </table>
+
+    <div class="mb-4" style="width: 300px;">
+        <div class="input-group" style="width: 300px;">
+          <input class="form-control upload-name" value="" placeholder="새 이미지 선택" readonly />
+          <input type="file" id="file" name="image" class="d-none" onchange="displayFileName()" accept="image/*" />
+          <label for="file" class="btn btn-outline-secondary m-0">파일 선택</label>
+        </div>
+    </div>
+
+    <div class="mt-3 mb-5">
+      <button class="btn btn-outline-primary btn-sm" type="submit">수정</button>
+      &nbsp;&nbsp;
+      <a href="/product/view" class="btn btn-outline-primary btn-sm">제품목록 돌아가기</a>
+    </div>
+  </form>
+</div>
+
+<script>
+  function displayFileName() {
+    var fileInput = document.getElementById('file');
+    if (fileInput.files.length > 0) {
+      $(".upload-name").val(fileInput.files[0].name);
+    }
+  }
+
+  function updateCategoryIds() {
+    var selectedValue = $("#id_main").val();
+    if (selectedValue) {
+      var ids = selectedValue.split(':');
+      $("#main_id").val(ids[0]);
+      $("#sub_id").val(ids[1]);
+    }
+  }
+</script>

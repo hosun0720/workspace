@@ -1,0 +1,72 @@
+<div class="container">
+  <h2>코드 수정</h2>
+
+  <form action="/code/update_process" method="post">
+    <input type="hidden" name="main_id" value="<%= result.main_id %>" />
+    <input type="hidden" name="sub_id" value="<%= result.sub_id %>" />
+
+    <div class="mb-3">
+      <label class="form-label" for="main_name">대분류명</label>
+      <input
+        class="form-control"
+        type="text"
+        name="main_name"
+        id="main_name"
+        value="<%= result.main_name %>"
+        style="width: 300px"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" for="sub_name">소분류명</label>
+      <input
+        class="form-control"
+        type="text"
+        name="sub_name"
+        id="sub_name"
+        value="<%= result.sub_name %>"
+        style="width: 300px"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" for="start">시작일</label>
+      <input
+        class="form-control"
+        type="text"
+        name="start"
+        id="start"
+        value="<%= result.start %>"
+        readonly
+        style="width: 300px; background-color: #e9ecef"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" for="end">종료일</label>
+      <input
+        class="form-control"
+        type="text"
+        name="end"
+        id="end"
+        value="<%= result.end %>"
+        style="width: 300px"
+        required
+      />
+    </div>
+
+    <hr />
+
+    <div class="mt-4">
+      <button class="btn btn-outline-primary btn-sm" type="submit">수정</button>
+
+      <a href="/code/view">
+        <button class="btn btn-outline-primary btn-sm" type="button">
+          코드 목록 돌아가기
+        </button>
+      </a>
+    </div>
+  </form>
+</div>

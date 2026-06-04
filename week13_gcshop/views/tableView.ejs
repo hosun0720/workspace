@@ -1,0 +1,51 @@
+<div class="container mt-4">
+  <h2 class="mb-3"><%= tableName %> 자료 목록</h2>
+  
+  <table class="table table-bordered border-primary table-hover mb-0" style="text-align: center; vertical-align: middle;">
+    <thead class="table-primary">
+      <tr>
+        <% if (typeof columns !== 'undefined' && columns.length > 0) { %>
+          <% columns.forEach((col) => { %>
+            <th><%= col.COLUMN_COMMENT ? col.COLUMN_COMMENT : col.COLUMN_NAME %></th>
+          <% }) %>
+        <% } %>
+        
+        <th colspan="2"></th>
+      </tr>
+    </thead> 
+    
+    <% if (typeof rows !== 'undefined' && rows.length > 0) { %>
+      <tbody>
+        <% rows.forEach((row) => { %>
+          <tr>
+            <% columns.forEach((col) => { %>
+              <td><%= row[col.COLUMN_NAME] %></td>
+            <% }) %>
+
+            <% var combinedId = pKeys.map(key => row[key]).join('|'); %>
+
+            <td>
+              <a href="/table/update/<%= tableName %>/<%= combinedId %>" style="text-decoration: none;" class="btn btn-sm btn-link py-0 text-primary">수정</a>
+            </td>
+            <td>
+              <a href="/table/delete/<%= tableName %>/<%= combinedId %>" style="text-decoration: none;" class="btn btn-sm btn-link py-0 text-danger" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    <% } %>
+  </table>
+
+  <% if (typeof rows === 'undefined' || rows.length === 0) { %>
+    <p class="text-muted text-center" style="padding: 30px 0; font-size: 1.1rem; border: 1px solid #dee2e6; border-top: none;">
+      테이블에 등록된 데이터 자료가 존재하지 않습니다.
+    </p>
+    <div class="d-flex justify-content-end gap-2 mt-3">
+      <a href="/table/create?tableName=<%= tableName %>" class="btn btn-primary btn-sm">생성</a>
+    </div>
+  <% } else { %>
+    <div class="d-flex justify-content-end gap-2 mt-3 mb-5">
+      <a href="/table/create?tableName=<%= tableName %>" class="btn btn-primary btn-sm">생성</a>
+    </div>
+  <% } %>
+</div>

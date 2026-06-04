@@ -1,0 +1,33 @@
+<div class="container mt-4">
+  
+  <table class="table table-bordered border-primary table-hover mb-0" style="text-align: center; vertical-align: middle;">
+    <thead class="table-primary">
+      <tr>
+        <th style="width: 30%;">테이블 명</th>
+        <th style="width: 70%;">테이블 설명</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (results && results.length > 0) { %>
+        <% results.forEach((table) => { %>
+          <tr>
+            <td>
+              <a href="/table/view/<%= table.TABLE_NAME %>" style="text-decoration: none; font-weight: bold;">
+                <%= table.TABLE_NAME %>
+              </a>
+            </td>
+            <td style="text-align: left; padding-left: 20px;">
+              <%= table.TABLE_COMMENT %>
+            </td>
+          </tr>
+        <% }) %>
+      <% } %>
+    </tbody>
+  </table>
+
+  <% if (!results || results.length === 0) { %>
+    <p class="text-muted text-center" style="padding: 40px 0; font-size: 1.1rem; border: 1px solid #dee2e6; border-top: none;">
+      현재 조회 가능한 데이터베이스 테이블 항목이 존재하지 않습니다.
+    </p>
+  <% } %>
+</div>

@@ -1,0 +1,58 @@
+<div class="container mt-4">
+
+  <table class="table table-bordered border-primary table-hover" style="text-align: center; vertical-align: middle;">
+    <thead class="table-primary">
+      <tr>
+        <th>ID</th>
+        <th>PW</th>
+        <th>이름</th>
+        <th>성별</th>
+        <th>주소</th>
+        <th>전화번호</th>
+        <th>생일</th>
+        <th>클래스</th>
+        <th colspan="2">메뉴</th>
+      </tr>
+    </thead> 
+    <tbody>
+      <% if (typeof results !== 'undefined' && results.length > 0) { %>
+        <% 
+      const classMap = {
+        'CST': 'CST(고객)',
+        'MNG': 'MNG(관리자)',
+        'CEO': 'CEO(경영진)' 
+      };
+    %>
+        <% results.forEach((item) => { %>
+          <tr>
+            <td><%= item.loginid %></td>
+            <td><%= item.password %></td>
+            <td><%= item.name %></td>
+            <td>
+              <%= item.mf === 'M' ? '남자' : (item.mf === 'F' ? '여자' : item.mf) %>
+            </td> 
+            <td><%= item.address %></td>
+            <td><%= item.tel %></td>
+            <td><%= item.birth %></td>
+            <td><%= classMap[item.class] || item.class %></td>
+            
+            <td><a href="/person/update/<%= item.loginid %>" style="text-decoration: none;">수정</a></td>
+            <td>
+              <a href="/person/delete/<%= item.loginid %>" 
+                 onclick="return confirm('정말로 삭제하시겠습니까?')" 
+                 style="text-decoration: none;" >삭제</a>
+            </td>
+          </tr>
+        <% }) %>
+      <% } %>
+    </tbody>
+  </table>
+
+  <% if (typeof results === 'undefined' || results.length === 0) { %>
+    <p class="text-center text-secondary my-4">등록된 고객 정보가 없습니다.</p>
+  <% } %>
+
+  <div class="mt-3 mb-5">
+    <a href="/person/create" class="btn btn-outline-secondary btn-sm">고객 추가</a>  
+  </div>
+</div>

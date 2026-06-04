@@ -1,0 +1,46 @@
+<div class="container mt-4">
+  <table class="table table-bordered table-hover">
+    <thead class="table-primary">
+      <tr style="text-align: center; vertical-align: middle;">
+        <th>상품</th>
+        <th>상품명</th>
+        <th>단가</th>
+        <th>구매량</th>
+        <th>총금액</th>
+        <th>구매일</th>
+        <th>취소여부</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (typeof results !== 'undefined' && results.length > 0) { %>
+        <% results.forEach((item) => { %>
+          <tr style="text-align: center; vertical-align: middle;">
+            <td>
+              <a href="/detail/<%= item.prod_id %>" style="text-decoration: none;">
+                <img src="/images/<%= item.prod_image ? item.prod_image : 'no-image.jpg' %>" style="width:100px; height:100px; object-fit: cover; border-radius: 5px;">
+              </a>
+            </td>
+            <td><%= item.prod_name %></td>
+            <td><%= item.price ? item.price.toLocaleString() : 0 %> 원</td>
+            <td><%= item.qty %></td>
+            <td><%= item.total ? item.total.toLocaleString() : 0 %> 원</td>
+            <td><%= item.date %></td>
+            <td>
+              <% if (item.cancel === 'N') { %>
+                <a href="/purchase/cancel_process/<%= item.purchase_id %>" style="text-decoration: none;" onclick="return confirm('정말로 구매를 취소하시겠습니까?')">구매취소</a>
+              <% } else { %>
+                <span>취소된 상품</span>
+              <% } %>
+            </td>
+          </tr>
+        <% }) %>
+      <% } else { %>
+        <tr>
+          <td colspan="7" style="text-align: center; padding: 20px;" class="text-muted">
+            구매하신 내역이 존재하지 않습니다.
+          </td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>

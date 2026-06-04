@@ -1,0 +1,66 @@
+<h1><%= title %></h1>
+<table class="table table-bordered border-primary table-hover" style="text-align: center; vertical-align: middle;">
+  <thead class="table-primary">
+    <tr>
+      <th style="width: 20%;">작성자</th>
+      <th style="width: 60%;">제목</th>
+      <th style="width: 20%;">날짜</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if (results && results.length > 0) { %>
+      <% results.forEach((post) => { %>
+        <% 
+          var isReply = post.p_id && post.p_id !== 0 && post.board_id !== post.p_id; 
+        %>
+        <tr>
+          <td><%= post.loginid %></td>
+          
+          <td style="text-align: left; padding-left: 20px;">
+            <% if (isReply) { %>
+              <a href="/board/detail/<%= post.board_id %>/<%= pNum %>/<%= btname[0].re_YN %>" style="text-decoration: none; color: #6c757d; font-weight: 500;">
+              <%= post.title %>
+              </a>
+            <% } else { %>
+              <a href="/board/detail/<%= post.board_id %>/<%= pNum %>/<%= btname[0].re_YN %>" style="text-decoration: none; font-weight: bold; color: #000;">
+                <%= post.title %>
+              </a>
+            <% } %>
+          </td>
+          
+          <td><%= post.date %></td>
+        </tr>
+      <% }) %>
+    <% } %>
+  </tbody>
+</table>
+
+<% if (!results || results.length === 0) { %>
+    <p class="text-muted text-center mt-3">글쓰기 버튼으로 글을 작성하세요.</p>
+<% } %>
+
+<div class="mb-3 mt-3">
+  <% 
+    var j = 1;
+    while (j <= totalPages) {
+      if (j == pNum) { 
+  %>
+        <span style="font-weight : bold;" class="text-primary"><%= j %></span>&nbsp;&nbsp;
+  <% 
+      } else { 
+  %>
+        <span><a href="/board/view/<%= btname[0].type_id %>/<%= j %>" style="text-decoration: none;"><%= j %></a></span>&nbsp;&nbsp;
+  <% 
+      }
+      j++;
+    } 
+  %>
+</div>
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+  <% if (cls === 'MNG' || (cls === 'CST' && write_YN === 'Y')) { %>
+    <a href="/board/create/<%= type_id %>" class="btn btn-info text-white me-md-2 btn-sm">
+      글쓰기
+    </a>
+  <% } %>
+</div>

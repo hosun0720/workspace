@@ -1,0 +1,77 @@
+<div class="container">
+  <form action="/board/answer_process" method="post">
+    <input type="hidden" name="board_id" value="<%= row.board_id %>" />
+    <input type="hidden" name="pNum" value="<%= pNum %>" />
+
+    <div class="mb-3">
+      <label class="form-label">제목</label>
+      <input
+        class="form-control"
+        type="text"
+        value="<%= row.title %>"
+        style="width: 300px"
+        disabled
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">작성자</label>
+      <input
+        class="form-control"
+        type="text"
+        value="<%= row.writer_name ? row.writer_name : row.loginid %>"
+        style="width: 300px"
+        disabled
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">작성일자</label>
+      <input
+        class="form-control"
+        type="text"
+        value="<%= row.date %>"
+        style="width: 300px"
+        disabled
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">내용</label>
+      <textarea
+        class="form-control"
+        style="width: 800px; height: 200px"
+        disabled
+      >
+<%= row.content %></textarea
+      >
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label" style="font-weight: bold; color: #0d6efd"
+        >답변</label
+      >
+      <textarea
+        class="form-control"
+        name="answer_content"
+        style="width: 800px; height: 120px"
+        placeholder="답변 내용을 입력하세요."
+        required
+      ></textarea>
+    </div>
+
+    <div
+      class="d-grid gap-2 d-md-flex justify-content-md-end"
+      style="width: 800px"
+    >
+      <button type="submit" class="btn btn-info text-white me-md-2">
+        작성
+      </button>
+      <a
+        href="/board/view/<%= row.type_id %>/<%= pNum %>"
+        class="btn btn-info text-white me-md-2"
+        >목록</a
+      >
+    </div>
+  </form>
+</div>
