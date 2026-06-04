@@ -1,0 +1,41 @@
+<div class="container">
+
+    <table class="table table-bordered border-primary table-hover" style="text-align: center">
+        <thead class="table-primary">
+            <tr>
+                <th>상품</th>
+                <th>상품명</th>
+                <th>가격</th>
+                <th>브랜드</th>
+                <% if (cls === 'MNG' && typeof buttonCUD !== 'undefined' && buttonCUD) { %><th colspan="2"></th><% } %> 
+            </tr>
+        </thead>
+        <tbody>
+            <% if (typeof results !== 'undefined' && results.length > 0) { %>
+                <% results.forEach((item) => { %>
+                    <tr style="text-align: center; vertical-align: middle;">
+                        <td>
+                            <img src="/images/<%= item.image ? item.image : 'no-image.jpg' %>" 
+                                 style="width:100px; height:100px; object-fit: cover;">
+                        </td>
+                        <td><%= item.name %></td>
+                        <td><%= item.price.toLocaleString() %> 원</td>
+                        <td><%= item.brand %></td>
+                            <% if (cls === 'MNG' && typeof buttonCUD !== 'undefined' && buttonCUD) { %>
+                        <td><a href="/product/update/<%= item.prod_id %>" style="text-decoration: none">수정</a></td>
+                        <td><a href="/product/delete/<%= item.prod_id %>"style="text-decoration: none" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a></td>
+                        <% } %> 
+                    </tr>
+                <% }) %>
+            <% } %>
+        </tbody>
+    </table>
+
+    <% if (typeof results === 'undefined' || results.length === 0) { %>
+            <p>등록된 상품 정보가 없습니다.</p>
+    <% } %>
+    
+    <% if (cls === 'MNG' && typeof buttonCUD !== 'undefined' && buttonCUD) { %>
+        <a href="/product/create"><button class="btn btn-outline-secondary">상품 추가</button></a>
+    <% } %> 
+</div>

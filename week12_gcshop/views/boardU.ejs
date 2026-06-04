@@ -1,0 +1,40 @@
+<div class="container"> 
+  <h2>게시글 수정</h2>
+  
+  <form action="/board/update_process" method="post">
+    
+    <input type="hidden" name="board_id" value="<%= post.board_id %>">
+    <input type="hidden" name="type_id" value="<%= type_id %>">
+    <input type="hidden" name="pNum" value="<%= pNum %>">
+
+    <div class="mb-3">
+      <label class="form-label">제목</label> 
+      <input class="form-control" type="text" name="title" value="<%= post.title %>" style="width:300px;" required />
+    </div>
+    
+    <div class="mb-3">
+      <label class="form-label">작성자</label> 
+      <input class="form-control" type="text" value="<%= post.writer_name %>" style="width:300px;" disabled/>
+    </div>
+    
+    <div class="mb-3">
+      <label class="form-label">내용</label> 
+      <textarea class="form-control" name="content" style="width:800px;height: 200px;" required><%= post.content %></textarea>
+    </div>
+    
+    <% if (cls !== 'MNG') { %>
+      <div class="mb-3">
+        <label class="form-label">본인 확인 비밀번호</label> 
+        <input class="form-control" type="password" name="password" style="width:300px;" required />
+      </div>
+    <% } else { %>
+      <input type="hidden" name="password" value="" />
+    <% } %>
+    
+    <button class="btn btn-outline-primary btn-sm" type="submit">수정 완료</button>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <a href="/board/detail/<%= post.board_id %>/<%= pNum %>" class="btn btn-info text-white me-md-2">취소</a>
+    </div>
+  </form>
+</div>

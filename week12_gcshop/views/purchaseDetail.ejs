@@ -1,0 +1,32 @@
+<table class="table table-bordered">
+  <form method="post">
+    <input type="hidden" name="prod_id" value="<%= p.prod_id %>">
+    <input type="hidden" name="price" value="<%= p.price %>">
+
+    <tr>
+      <td rowspan="5">
+        <img src="/images/<%= p.image ? p.image : 'no-image.jpg' %>" style="width:300px; height:300px; object-fit: cover;">
+      </td>
+      <td><h4><%= p.name %></h4></td>
+    </tr>
+    <tr> 
+      <td>가격 : <%= p.price ? p.price.toLocaleString() : 0 %> 원</td>
+    </tr>
+    <tr> 
+      <td>브랜드 : <%= p.brand %></td>
+    </tr>
+    <tr> 
+      <td>수량 : <input type="number" name="qty" min="1" value="1" style="width: 100px; display: inline-block;" class="form-control form-control-sm" required> </td>
+    </tr>
+    <tr>
+      <td>
+        <% if (login && cls === 'CST') { %>
+          <button class="btn btn-outline-primary btn-sm" formaction="/purchase/create_process" type="submit">결제</button>
+          <button class="btn btn-outline-primary btn-sm" formaction="/purchase/cart/create_process" type="submit">장바구니</button>
+        <% } else { %>
+          <span class="text-danger">고객 계정만 결제가 가능합니다.</span>
+        <% } %>
+      </td>
+    </tr>
+  </form>   
+</table>

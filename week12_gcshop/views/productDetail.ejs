@@ -1,0 +1,29 @@
+<table class="table table-bordered">
+  <tr>
+    <td rowspan="5">
+      <img src="/images/<%= p.image ? p.image : 'no-image.jpg' %>" style="width:300px; height:300px; object-fit: cover;">
+    </td>
+    <td><%= p.name %></td>
+  </tr>
+  <tr> 
+    <td>가격 : <%= p.price ? p.price.toLocaleString() : 0 %> 원</td>
+  </tr>
+  <tr> 
+    <td>브랜드 : <%= p.brand %></td>
+  </tr>
+  <tr> 
+    <td>공급업체 : <%= p.supplier %></td>
+  </tr>
+  <% if (login && cls === 'CST') { %>
+  <tr>
+    <td>
+        <a href="/purchase/detail/<%= p.prod_id %>" class="btn btn-outline-primary btn-sm">구매</a>
+        
+        <form action="/purchase/cart/create_process" method="post" style="display : inline-block">
+          <input type="hidden" value="<%= p.prod_id %>" name="prod_id">
+          <button class="btn btn-outline-primary btn-sm" type="submit">장바구니</button>
+        </form>
+    </td>
+  </tr>
+  <% } %>
+</table>

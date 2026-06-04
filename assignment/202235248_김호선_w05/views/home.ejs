@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AppsList</title>
+    <link rel="icon" href="data:,">
+    <style>
+        h1 { 
+            font-weight: bold; 
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1><a href="/">앱 목록 - 김호선</a></h1>
+    <table>
+        <thead>
+            <tr>
+                <th>앱이름</th>
+                <th>종류</th>
+                <th>설치일</th>
+                <th>앱설명</th>
+                <th></th> 
+            </tr>
+        </thead>
+        <tbody>
+            <% list.forEach(function(app) { %>
+            <tr>
+                <td><%= app.name %></td>
+                <td><%= app.class %></td>
+                <td><%= app.installdate %></td>
+                <td><%= app.descript %></td>
+                <td>
+                <a href="/update/<%= app.id %>"><button>갱신</button></a>
+                <a href="/delete_process/<%= app.id %>" onclick="return confirm('정말로 삭제하시겠습니까?')"><button>삭제</button></a>
+                </td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <%- body %>
+    <%- menu %>
+</body>
+</html>

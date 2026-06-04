@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <style>
+        h1 { 
+            font-weight: bold; 
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1><%= title %></h1>
+    <hr /> 
+    <table>
+        <thead>
+            <tr>
+                <th>순번</th>
+                <th>앱이름</th>
+                <th>종류</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% list.forEach(function(app, index) { %>
+                <tr>
+                    <td><%= index + 1 %></td>
+                    
+                    <td>
+                        <p><%= app.name %></p>
+                    </td>
+                    
+                    <td><%= app.class %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>

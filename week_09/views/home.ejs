@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB1</title>
+    <link rel="icon" href="data:,">
+</head>
+<body>
+     <%-login%>
+    <h1><a href="/"><%- title %></a></h1>
+    <img src="/image/photo.avif" style="width: 200px;height: 100px;display: block;margin-top:10px;">
+    <a href="/author">author</a>
+    <ol type="1">
+    <% var i = 0
+        while(i < list.length)
+    { %>
+    <li><a href="/page/<%=list[i].id%>"><%-list[i].title%></a></li>
+    <% i += 1 } %>
+    </ol>
+
+    <%- menu%>
+    <%- body%>
+</body>
+</html>
